@@ -29,3 +29,10 @@ git push
 
 ## Importante quando estiver na univali
 export PAGER=
+
+```Java
+public void main(String args[]){
+	int i = 0;
+	i++;
+}
+```
