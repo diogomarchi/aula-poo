@@ -18,13 +18,48 @@ public class Prova {
     private int peso;
     private String local;
     private String data;
-
-    //construtor
-    public Prova(String nome) {
-        this.nomeDisciplina = nome;
-        this.peso = 10;
+    
+    private Discursiva[] questaoDiscursiva; 
+    private Objetivas[] questaoObjetiva; 
+    
+    
+    public int alocaD(int tam){
+        questaoDiscursiva = new Discursiva[tam];
+        for(int i = 0; i < tam; i++){
+            questaoDiscursiva[i] = new Discursiva();
+            
+        }
+        return 0;
     }
-
+    
+    public int alocaO(int tam){
+        questaoObjetiva = new Objetivas[tam];
+        for(int i = 0; i < tam; i++){
+            questaoObjetiva[i] = new Objetivas();
+        }
+        return 0;
+    }
+    
+    
+    //construtor
+    public Prova() {
+        
+    }
+    
+    public Discursiva[] getQuestaoDiscursiva() {
+        return questaoDiscursiva;
+    }
+    public void setQuestaoDiscursiva(Discursiva[] questaoDiscursiva) {
+        this.questaoDiscursiva = questaoDiscursiva;
+    }
+    public Objetivas[] getQuestaoObjetiva() {
+        return questaoObjetiva;
+    }
+    public void setQuestaoObjetiva(Objetivas[] questaoObjetiva) {
+        this.questaoObjetiva = questaoObjetiva;
+    }
+    
+ 
     public String getNomeDisciplina() {
         return nomeDisciplina;
     }
@@ -58,7 +93,7 @@ public class Prova {
     }
 
     //metodo
-    public String obtemDetalhes() {
+    public String cabeçalho() {
         String retorno = "";
         retorno = retorno + "Nome: " + this.getNomeDisciplina() + "\n";
         retorno = retorno + "Peso: " + this.getPeso() + "\n";
@@ -66,5 +101,22 @@ public class Prova {
         retorno = retorno + "Data: " + this.getData() + "\n";
         return retorno;
     }
-
+    
+    public String imprimir(int tamd, int tamo){
+        String retorno = "";
+        for(int i = 0; i < tamd; i ++){
+            retorno = retorno + "(" + this.questaoDiscursiva[i].getPeso() + ")";
+            retorno = retorno + this.questaoDiscursiva[i].getPergunta() + "\n";
+            retorno = retorno + this.questaoDiscursiva[i].getCriteriosCorrecao() + "\n";
+        }
+        for(int i = 0; i < tamo; i ++){
+            retorno += "(" + this.questaoObjetiva[i].getPeso() + ")";
+            retorno += this.questaoObjetiva[i].getPergunta() + "\n";
+            for(int j = 0; j < 5; j++){
+                retorno += "(" + (j+1)+ ")" + this.questaoObjetiva[i].getOpcoes()[j]+ "\n";
+            }
+            retorno += "Resposta correta é: " + this.questaoObjetiva[i].getRespostaCorreta() + "\n";
+        }
+        return retorno;
+    }
 }
