@@ -104,16 +104,18 @@ public class Prova {
     
     public String imprimir(int tamd, int tamo){
         String retorno = "";
+        retorno += "Questoes discursivas: \n\n";
         for(int i = 0; i < tamd; i ++){
-            retorno = retorno + "(" + this.questaoDiscursiva[i].getPeso() + ")";
+            retorno = retorno + "(" + this.questaoDiscursiva[i].getPeso() + ") ";
             retorno = retorno + this.questaoDiscursiva[i].getPergunta() + "\n";
-            retorno = retorno + this.questaoDiscursiva[i].getCriteriosCorrecao() + "\n";
+            retorno = retorno + "Criterio de avaliacao: " + this.questaoDiscursiva[i].getCriteriosCorrecao() + "\n";
         }
+        retorno += "\n Questoes objetivas: \n\n";
         for(int i = 0; i < tamo; i ++){
-            retorno += "(" + this.questaoObjetiva[i].getPeso() + ")";
+            retorno += "(" + this.questaoObjetiva[i].getPeso() + ") ";
             retorno += this.questaoObjetiva[i].getPergunta() + "\n";
             for(int j = 0; j < 5; j++){
-                retorno += "(" + (j+1)+ ")" + this.questaoObjetiva[i].getOpcoes()[j]+ "\n";
+                retorno += "(" + (j+1)+ ") " + this.questaoObjetiva[i].getOpcoes()[j]+ "\n";
             }
             retorno += "Resposta correta é: " + this.questaoObjetiva[i].getRespostaCorreta() + "\n";
         }
