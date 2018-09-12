@@ -73,15 +73,10 @@ public class Prova {
         return retorno;
     }
     
-    public String imprimir(int tamd, int tamo){
+    public String imprimir(){
         String retorno = cabeçalho();
-        retorno += "Questoes discursivas: \n";
-        for(int i = 0; i < tamd; i ++){
-            retorno += this.questaoDiscursiva[i].seImprime();
-        }
-        retorno += "\n\n Questoes objetivas: \n";
-        for(int i = 0; i < tamo; i ++){
-            retorno += this.questaoObjetiva[i].seImprime();
+        for(int i = 0; i < lista.size(); i ++){
+            retorno += this.lista.get(i).seImprime();
         }
         return retorno;
     }
