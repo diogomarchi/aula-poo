@@ -43,22 +43,19 @@ public class GeradorProva {
         x.setNomeDisciplina(nome_disc);
         
         //pedindo peso da prova
-        chave = 1;
-        while(chave == 1){
-            chave = 0;
+        int peso = -1;
+       /* while(peso < 0){
             peso_em_texto = JOptionPane.showInputDialog("Informe o peso da prova: ");
-            for(int i = 0; i < peso_em_texto.length(); i++){
-                char c = peso_em_texto.charAt(i);
-                if(c == '1'||c == '2'||c == '3'||c == '4'||c == '5'||c == '6'||c == '7'||c == '8'||c == '9'||c == '0'){
-                    continue;
-                }else{
-                    chave = 1;
-                    JOptionPane.showMessageDialog(null, "Digite novamente, nome invalido: ");
-                    break;
-                }
-            }
+            
+                }*/
+        
+        System.out.println("Informe o peso da prova:");
+        while(!s.hasNextInt()){
+            System.out.println("Erro! Digite um numero valido.");
+            s.nextLine();
         }
-        int peso = Integer.parseInt(peso_em_texto);
+        
+        peso = s.nextInt();
         x.setPeso(peso);
         
         
@@ -88,79 +85,37 @@ public class GeradorProva {
         
         
         //montando as perguntas discrusivas
-        String qtdd = "0";
-        //pedindo quantdade de questoes discursivas
-        chave = 1;
-        while(chave == 1){
-            chave = 0;
-            qtdd = JOptionPane.showInputDialog("Informe a quantidade de questoes discursivas: ");
-            for(int i = 0; i < qtdd.length(); i++){
-                char c = qtdd.charAt(i);
-                if(c == '1'||c == '2'||c == '3'||c == '4'||c == '5'||c == '6'||c == '7'||c == '8'||c == '9'||c == '0'){
-                    continue;
-                }else{
-                    chave = 1;
-                    JOptionPane.showMessageDialog(null, "Digite novamente, nome invalido: ");
-                    break;
-                }
+        
+        
+        Discursiva d = new Discursiva();
+            System.out.println("informe o peso da pergunta: ");
+            while(!s.hasNextInt()){
+                 System.out.println("Erro! Digite um numero valido.");
+                 s.nextLine();
             }
-        }
-        int quantidadeDiscursiva = Integer.parseInt(qtdd);
-        x.alocaD(quantidadeDiscursiva);//aloca o vetor de questoes, conforme o numero digitado pelo usuario
-        Discursiva[] d = new Discursiva[quantidadeDiscursiva]; 
-        //pedindo atributos de questoes discursivas
-        for(int i = 0; i < quantidadeDiscursiva; i++){
-            d[i] = new Discursiva();
-            String peso_em_textoqd = "0";
-            chave = 1;
-            while(chave == 1){
-                chave = 0;
-                peso_em_textoqd = JOptionPane.showInputDialog("Qual é o peso da pergunta: ");
-                for(int j = 0; j < qtdd.length(); j++){
-                    char c = peso_em_textoqd.charAt(j);
-                    if(c == '1'||c == '2'||c == '3'||c == '4'||c == '5'||c == '6'||c == '7'||c == '8'||c == '9'||c == '0'){
-                        continue;
-                    }else{
-                        chave = 1;
-                        JOptionPane.showMessageDialog(null, "Digite novamente, nome invalido: ");
-                        break;
-                    }
-                }
-            }
-            float pesoqd = Float.parseFloat(peso_em_textoqd);
-            d[i].setPeso(pesoqd);//gravando o peso da pergunta
+            peso = s.nextInt();
+            d.setPeso(peso);//gravando o peso da pergunta
             //pedindo a pergunta
             String pergunta = JOptionPane.showInputDialog("Qual é a pergunta: ");
-            d[i].setPergunta(pergunta);//gravando a pergunta
+            d.setPergunta(pergunta);//gravando a pergunta
             //pedindo o criterio
             String criterio = JOptionPane.showInputDialog("Qual é o critério de correção da pergunta: ");
-            d[i].setCriteriosCorrecao(criterio);//gravando o criterio de correção
-        }
-        x.setQuestaoDiscursiva(d);//gravando no vetor de questões, a questão
+            d.setCriteriosCorrecao(criterio);//gravando o criterio de correção
+        x.inserelista(d);//gravando no vetor de questões, a questão
         
         
-        //montando as perguntas objetivas
-        String qtdo = null;
-        chave = 1;
-        while(chave == 1){
-            chave = 0;
-            qtdo = JOptionPane.showInputDialog("Informe a quantidade de questoes objetivas: ");
-            for(int i = 0; i < qtdo.length(); i++){
-                char c = qtdd.charAt(i);
-                if(c == '1'||c == '2'||c == '3'||c == '4'||c == '5'||c == '6'||c == '7'||c == '8'||c == '9'||c == '0'){
-                    continue;
-                }else{
-                    chave = 1;
-                    JOptionPane.showMessageDialog(null, "Digite novamente, nome invalido: ");
-                    break;
-                }
-            }
-        }
-        int quantidadeObjetivas = Integer.parseInt(qtdo);
-        x.alocaO(quantidadeObjetivas);//aloca o vetor de questoes, conforme o numero digitado pelo usuario
-        Objetivas[] o = new Objetivas[quantidadeObjetivas];//aloca um tamanho para o vetor
-        for( int i = 0; i < quantidadeObjetivas; i++){
-            o[i] = new Objetivas();//aloca o espacinho do vetor
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        Objetivas o = new Objetivas();
+        
+        
             //pedindo o peso da questao
             chave = 1;
             String peso_em_textoqo = "0";
@@ -237,9 +192,11 @@ public class GeradorProva {
             o[i].setRespostaCorreta(Integer.parseInt(respostaCorreta));//grava a resposta correta
         }
         x.setQuestaoObjetiva(o);//grava a pergunta objetiva
-        //JOptionPane.showMessageDialog(null, x.cabeçalho());
-        JOptionPane.showMessageDialog(null,x.cabeçalho() +  x.imprimir(quantidadeDiscursiva,quantidadeObjetivas));
+        
+        JOptionPane.showMessageDialog(null,x.imprimir(quantidadeDiscursiva, quantidadeObjetivas
+        ));
         
     }
+    
            
 }

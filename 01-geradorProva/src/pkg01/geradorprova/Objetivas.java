@@ -17,6 +17,18 @@ final class Objetivas extends Questao{
     public Objetivas(){
         this.opcoes = new String[5];
     }
+    
+    public String seImprime(){
+        String retorno = "";
+        retorno += "###################################\n";
+        retorno += "(" + this.getPeso() + ") ";
+        retorno += this.getPergunta() + "\n";
+        for(int j = 0; j < 5; j++){
+            retorno += "(" + (j+1)+ ") " + this.getOpcoes()[j]+ "\n";
+        }
+        retorno += "Resposta correta é: " + this.getRespostaCorreta() + "\n";
+        return retorno;
+    } 
 
     /**
      * @return the opcoes

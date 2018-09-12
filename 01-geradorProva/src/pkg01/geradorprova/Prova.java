@@ -6,6 +6,7 @@
 package pkg01.geradorprova;
 
 import com.sun.xml.internal.ws.api.message.MessageHeaders;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,45 +19,15 @@ public class Prova {
     private int peso;
     private String local;
     private String data;
-    
-    private Discursiva[] questaoDiscursiva; 
-    private Objetivas[] questaoObjetiva; 
-    
-    
-    public int alocaD(int tam){
-        questaoDiscursiva = new Discursiva[tam];
-        for(int i = 0; i < tam; i++){
-            questaoDiscursiva[i] = new Discursiva();
-            
-        }
-        return 0;
-    }
-    
-    public int alocaO(int tam){
-        questaoObjetiva = new Objetivas[tam];
-        for(int i = 0; i < tam; i++){
-            questaoObjetiva[i] = new Objetivas();
-        }
-        return 0;
-    }
-    
+    private ArrayList<Questao>lista;
     
     //construtor
     public Prova() {
-        
+        ArrayList<Questao> lista = new ArrayList<>();
     }
     
-    public Discursiva[] getQuestaoDiscursiva() {
-        return questaoDiscursiva;
-    }
-    public void setQuestaoDiscursiva(Discursiva[] questaoDiscursiva) {
-        this.questaoDiscursiva = questaoDiscursiva;
-    }
-    public Objetivas[] getQuestaoObjetiva() {
-        return questaoObjetiva;
-    }
-    public void setQuestaoObjetiva(Objetivas[] questaoObjetiva) {
-        this.questaoObjetiva = questaoObjetiva;
+    public void inserelista(Questao d){
+        lista.add(d);
     }
     
  
@@ -103,21 +74,14 @@ public class Prova {
     }
     
     public String imprimir(int tamd, int tamo){
-        String retorno = "";
-        retorno += "Questoes discursivas: \n\n";
+        String retorno = cabeçalho();
+        retorno += "Questoes discursivas: \n";
         for(int i = 0; i < tamd; i ++){
-            retorno = retorno + "(" + this.questaoDiscursiva[i].getPeso() + ") ";
-            retorno = retorno + this.questaoDiscursiva[i].getPergunta() + "\n";
-            retorno = retorno + "Criterio de avaliacao: " + this.questaoDiscursiva[i].getCriteriosCorrecao() + "\n";
+            retorno += this.questaoDiscursiva[i].seImprime();
         }
-        retorno += "\n Questoes objetivas: \n\n";
+        retorno += "\n\n Questoes objetivas: \n";
         for(int i = 0; i < tamo; i ++){
-            retorno += "(" + this.questaoObjetiva[i].getPeso() + ") ";
-            retorno += this.questaoObjetiva[i].getPergunta() + "\n";
-            for(int j = 0; j < 5; j++){
-                retorno += "(" + (j+1)+ ") " + this.questaoObjetiva[i].getOpcoes()[j]+ "\n";
-            }
-            retorno += "Resposta correta é: " + this.questaoObjetiva[i].getRespostaCorreta() + "\n";
+            retorno += this.questaoObjetiva[i].seImprime();
         }
         return retorno;
     }

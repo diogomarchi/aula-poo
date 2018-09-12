@@ -12,6 +12,7 @@ package pkg01.geradorprova;
 abstract class Questao {
     private String pergunta;
     private double peso;
+    public abstract String seImprime();
 
     /**
      * @return the pergunta

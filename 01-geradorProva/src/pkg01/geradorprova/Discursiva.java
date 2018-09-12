@@ -25,4 +25,16 @@ final class Discursiva extends Questao{
     public void setCriteriosCorrecao(String criteriosCorrecao) {
         this.criteriosCorrecao = criteriosCorrecao;
     }
+
+    public String seImprime() {
+        String retorno = "";
+        retorno += "###################################\n";
+        retorno = retorno + "(" + this.getPeso() + ") ";
+        retorno = retorno + this.getPergunta() + "\n";
+        retorno += "------------------------\n";
+        retorno += "------------------------\n";
+        retorno += "------------------------\n";
+        retorno = retorno + "Criterio de avaliacao: " + this.getCriteriosCorrecao() + "\n";
+        return retorno;
+    }
 }
