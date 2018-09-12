@@ -27,7 +27,7 @@ public class Prova {
     }
     
     public void inserelista(Questao d){
-        lista.add(d);
+        getLista().add(d);
     }
     
  
@@ -75,9 +75,23 @@ public class Prova {
     
     public String imprimir(){
         String retorno = cabeçalho();
-        for(int i = 0; i < lista.size(); i ++){
-            retorno += this.lista.get(i).seImprime();
+        for(int i = 0; i < getLista().size(); i ++){
+            retorno += this.getLista().get(i).seImprime();
         }
         return retorno;
+    }
+
+    /**
+     * @return the lista
+     */
+    public ArrayList<Questao> getLista() {
+        return lista;
+    }
+
+    /**
+     * @param lista the lista to set
+     */
+    public void setLista(ArrayList<Questao> lista) {
+        this.lista = lista;
     }
 }
