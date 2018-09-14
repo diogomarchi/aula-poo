@@ -22,11 +22,11 @@ final class Objetivas extends Questao{
         String retorno = "";
         retorno += "###################################\n";
         retorno += "(" + this.getPeso() + ") ";
-        retorno += this.getPergunta() + "\n";
+        retorno += this.getPergunta() + "\r\n";
         for(int j = 0; j < 5; j++){
-            retorno += "(" + (j+1)+ ") " + this.getOpcoes()[j]+ "\n";
+            retorno += "(" + (j+1)+ ") " + this.getOpcoes()[j]+ "\r\n";
         }
-        retorno += "Resposta correta é: " + this.getRespostaCorreta() + "\n";
+        retorno += "Resposta correta é: " + this.getRespostaCorreta() + "\r\n";
         return retorno;
     } 
 

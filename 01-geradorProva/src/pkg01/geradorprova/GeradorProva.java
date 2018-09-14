@@ -14,6 +14,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+
 
 
 /**
@@ -30,8 +34,9 @@ public class GeradorProva {
         Scanner s = new Scanner(System.in);
         String nome_disc, local, data = null, peso_em_texto = null;
         Prova x = new Prova();//criando uma prova
-        String continuar;
-        int continua;
+        String continuar, aux;
+        int continua = 0, peso = 0, cont = 1;
+        String palavras = new String();
         
         //pedindo nome da disciplina
         nome_disc = JOptionPane.showInputDialog("Informe o nome da disciplina: ");
@@ -39,12 +44,11 @@ public class GeradorProva {
         
         
         //pedindo peso da prova
-        int peso = 0;
         while(true){
             try{
                 peso_em_texto = JOptionPane.showInputDialog("Informe o peso da prova: ");
                 peso = Integer.parseInt(peso_em_texto);
-                if(peso < 1){
+                if(peso < 1 || peso > 10){
                     JOptionPane.showMessageDialog(null, "Informe peso maior que zero");
                     throw new Exception ();
                 }
@@ -62,8 +66,9 @@ public class GeradorProva {
         
         
         //pedindo a data
-        String aux;
+        JOptionPane.showMessageDialog(null, "TESTEEEE");
         SimpleDateFormat sdf = new SimpleDateFormat("AA/BB/CCCC");
+        JOptionPane.showMessageDialog(null, "TESTEEEE");
         while (true) {
             try{
                 aux = JOptionPane.showInputDialog("Digite a data (AA/BB/CCCC):");
@@ -76,10 +81,10 @@ public class GeradorProva {
                 JOptionPane.showMessageDialog(null,"Digite uma data valida!");
             }
         } 
-        x.setData(data);
+        x.setData(aux);
         
         
-        ArrayList <Questao> asf = new ArrayList <Questao>();
+         ArrayList <Questao> questoes = new ArrayList <Questao>();
         //montando as perguntas discrusivas
         int opcao = 0;
         do{
@@ -99,22 +104,31 @@ public class GeradorProva {
 
             if ( opcao == 1){
                 Discursiva d = new Discursiva();
-                System.out.println("informe o peso da pergunta: ");
-                while(!s.hasNextInt()){
-                     System.out.println("Erro! Digite um numero valido.");
-                     s.nextLine();
-                }
-                peso = s.nextInt();
+                while(true){
+                    try{
+                        peso_em_texto = JOptionPane.showInputDialog("Informe o peso da questao: ");
+                        peso = Integer.parseInt(peso_em_texto);
+                        if(peso < 1){
+                            JOptionPane.showMessageDialog(null, "Peso inválido!");
+                            throw new Exception();
+                        }
+                        break; 
+                    }catch(Exception e){
+                        JOptionPane.showMessageDialog(null, "Caracter inválido");
+                    }
+                } 
+                
                 d.setPeso(peso);//gravando o peso da pergunta
                 //pedindo a pergunta
 
-                String pergunta = JOptionPane.showInputDialog("Qual é a pergunta: ");
+                String pergunta = JOptionPane.showInputDialog("Qual é a pergunta (" + cont + ")");
                 d.setPergunta(pergunta);//gravando a pergunta
                 //pedindo o criterio
                 String criterio = JOptionPane.showInputDialog("Qual é o critério de correção da pergunta: ");
                 d.setCriteriosCorrecao(criterio);//gravando o criterio de correção
 
-                x.inserelista(d);//gravando no vetor de questões, a questão
+                //x.inserelista(d);//gravando no vetor de questões, a questão
+                questoes.add(d);
             }
 
 
@@ -141,7 +155,7 @@ public class GeradorProva {
 
                 //pede a pergunta
                 String perguntao = null;
-                perguntao = JOptionPane.showInputDialog("Digite a Pergunta: ");
+                perguntao = JOptionPane.showInputDialog("Digite a Pergunta (" + cont + ")");
                 o.setPergunta(perguntao);//grava a pergunta
 
 
@@ -170,24 +184,50 @@ public class GeradorProva {
                 }
                 o.setRespostaCorreta(resposta);//grava a resposta correta
 
-                x.inserelista(o);//grava a pergunta objetiva
+                //x.inserelista(o);//grava a pergunta objetiva
+                questoes.add(o);
             }
             while(true){
                 try{
                     continuar = JOptionPane.showInputDialog("Digite 1 para sair\nDigite 0 para criar outra pergunta");
                     continua = Integer.parseInt(continuar);
                     if(continua < 0 || continua > 1){
-                        JOptionPane.showMessageDialog(null, "Digite um ou 0");
+                        JOptionPane.showMessageDialog(null, "Digite 1 ou 0");
                         throw new Exception();
                     }
+                    break;
                 }catch(Exception e){
                     JOptionPane.showMessageDialog(null, "Informe um numero válido");
                 }
             }
+            cont ++;
         }while(continua == 0);
+        x.setLista(questoes);
+        x.imprimir();
+        
         //JOptionPane.showMessageDialog(null, x.imprimir());
         
         
+        //salvando em texto
+        palavras = JOptionPane.showInputDialog("Informe o nome do arquivo");
+        File file = new File (palavras + ".txt");
+        try
+        {
+            if (!file.exists())
+                file.createNewFile();
+            
+            FileWriter fw = new FileWriter (file, true);
+            BufferedWriter bw = new BufferedWriter (fw);
+           
+            bw.write(x.imprimir()); 
+            
+            bw.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Deu erro!!!");
+        }
+    
         
     }
 }

@@ -23,14 +23,9 @@ public class Prova {
     
     //construtor
     public Prova() {
-        ArrayList<Questao> lista = new ArrayList<>();
+        
     }
     
-    public void inserelista(Questao d){
-        getLista().add(d);
-    }
-    
- 
     public String getNomeDisciplina() {
         return nomeDisciplina;
     }
@@ -70,15 +65,20 @@ public class Prova {
         retorno = retorno + "Peso: " + this.getPeso() + "\n";
         retorno = retorno + "Local: " + this.getLocal() + "\n";
         retorno = retorno + "Data: " + this.getData() + "\n";
+        retorno = retorno + "Aluno:___________________________\n";
         return retorno;
     }
     
     public String imprimir(){
-        String retorno = cabeçalho();
-        for(int i = 0; i < getLista().size(); i ++){
-            retorno += this.getLista().get(i).seImprime();
+        String imprime = "";
+        imprime += cabeçalho();
+        int cont = 1;
+        for(int i = 0; i < this.lista.size(); i ++){
+            imprime += cont;
+            imprime += this.lista.get(i).seImprime();
+            cont++;
         }
-        return retorno;
+        return imprime;
     }
 
     /**
@@ -91,7 +91,7 @@ public class Prova {
     /**
      * @param lista the lista to set
      */
-    public void setLista(ArrayList<Questao> lista) {
-        this.lista = lista;
+    public void setLista(ArrayList<Questao> x) {
+        this.lista = x;
     }
 }
