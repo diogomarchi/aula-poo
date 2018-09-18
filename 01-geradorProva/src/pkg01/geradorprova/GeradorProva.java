@@ -35,7 +35,7 @@ public class GeradorProva {
         String nome_disc, local, data = null, peso_em_texto = null;
         Prova x = new Prova();//criando uma prova
         String continuar, aux;
-        int continua = 0, peso = 0, cont = 1;
+        int continua = 0, peso = 0, cont = 1,contPeso = 0, verificaPeso = 0;
         String palavras = new String();
         
         //pedindo nome da disciplina
@@ -66,146 +66,159 @@ public class GeradorProva {
         
         
         //pedindo a data
-        JOptionPane.showMessageDialog(null, "TESTEEEE");
-        SimpleDateFormat sdf = new SimpleDateFormat("AA/BB/CCCC");
-        JOptionPane.showMessageDialog(null, "TESTEEEE");
-        while (true) {
-            try{
-                aux = JOptionPane.showInputDialog("Digite a data (AA/BB/CCCC):");
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("AA/BB/CCCC");
-                LocalDate.parse(aux, formatter);    
-                sdf.parse(aux);
-                break;
-            }
-            catch(DateTimeParseException | ParseException ex) {
-                JOptionPane.showMessageDialog(null,"Digite uma data valida!");
-            }
-        } 
+//        JOptionPane.showMessageDialog(null, "TESTEEEE");
+//        SimpleDateFormat sdf = new SimpleDateFormat("AA/BB/CCCC");
+//        JOptionPane.showMessageDialog(null, "TESTEEEE");
+//        while (true) {
+//            try{
+//                aux = JOptionPane.showInputDialog("Digite a data (AA/BB/CCCC):");
+//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("AA/BB/CCCC");
+//                LocalDate.parse(aux, formatter);    
+//                sdf.parse(aux);
+//                break;
+//            }
+//            catch(DateTimeParseException | ParseException ex) {
+//                JOptionPane.showMessageDialog(null,"Digite uma data valida!");
+//            }
+//        } 
+        aux = JOptionPane.showInputDialog("Digite uma data: ");
         x.setData(aux);
         
         
          ArrayList <Questao> questoes = new ArrayList <Questao>();
         //montando as perguntas discrusivas
-        int opcao = 0;
         do{
-            while(true){
-                try{
-                    String opcao_em_texto = JOptionPane.showInputDialog("Digite 1 para questoes discursivas\nDigite 2 para questoes objetivas");
-                    opcao = Integer.parseInt(opcao_em_texto);
-                    if(opcao < 1 || opcao > 2)
-                        throw new Exception();
-                    break;
-                }catch(Exception e){
-                    JOptionPane.showMessageDialog(null, "Informe um valor correto, por favor");
-                }
-            }
-
-
-
-            if ( opcao == 1){
-                Discursiva d = new Discursiva();
+            int opcao = 0;
+            JOptionPane.showMessageDialog(null, "Criando uma Prova");
+            do{
                 while(true){
                     try{
-                        peso_em_texto = JOptionPane.showInputDialog("Informe o peso da questao: ");
-                        peso = Integer.parseInt(peso_em_texto);
-                        if(peso < 1){
-                            JOptionPane.showMessageDialog(null, "Peso inválido!");
-                            throw new Exception();
-                        }
-                        break; 
-                    }catch(Exception e){
-                        JOptionPane.showMessageDialog(null, "Caracter inválido");
-                    }
-                } 
-                
-                d.setPeso(peso);//gravando o peso da pergunta
-                //pedindo a pergunta
-
-                String pergunta = JOptionPane.showInputDialog("Qual é a pergunta (" + cont + ")");
-                d.setPergunta(pergunta);//gravando a pergunta
-                //pedindo o criterio
-                String criterio = JOptionPane.showInputDialog("Qual é o critério de correção da pergunta: ");
-                d.setCriteriosCorrecao(criterio);//gravando o criterio de correção
-
-                //x.inserelista(d);//gravando no vetor de questões, a questão
-                questoes.add(d);
-            }
-
-
-
-
-            if(opcao == 2){
-                Objetivas o = new Objetivas();
-                String peso_em_textoo = null;
-                while(true){
-                    try{
-                        peso_em_textoo = JOptionPane.showInputDialog("Informe o peso da questão: ");
-                        peso = Integer.parseInt(peso_em_textoo);
-                        if(peso>10){
-                            JOptionPane.showMessageDialog(null, "Valor acima do peso da prova");
-                            throw new Exception ();
-                        }
-                        break;
-                    }catch(Exception e){
-                        JOptionPane.showMessageDialog(null, "Informe um valor correto por favor");
-                    }
-                }
-                o.setPeso(peso);//grava o peso da questao
-
-
-                //pede a pergunta
-                String perguntao = null;
-                perguntao = JOptionPane.showInputDialog("Digite a Pergunta (" + cont + ")");
-                o.setPergunta(perguntao);//grava a pergunta
-
-
-                //pede os opcoes
-                String[] opcoes = new String[5];//cria vetor de 5 alternativas
-                for(int j = 0; j < 5; j++){
-                    String alternativa = null;
-                    alternativa = JOptionPane.showInputDialog("informe a alternativa: ");
-                    opcoes[j] = alternativa;//preenchendo o vetor de alternativas
-                }
-                o.setOpcoes(opcoes);//grava o vetor de opcoes 
-
-
-                //pedindo resposta correta
-                int resposta = 0;
-                while(true){
-                    try{
-                        String resposta_em_texto = JOptionPane.showInputDialog("Digite a resposta correta: ");
-                        resposta = Integer.parseInt(resposta_em_texto);
-                        if(resposta < 1 || resposta > 5)
+                        String opcao_em_texto = JOptionPane.showInputDialog("Digite 1 para questoes discursivas\nDigite 2 para questoes objetivas");
+                        opcao = Integer.parseInt(opcao_em_texto);
+                        if(opcao < 1 || opcao > 2)
                             throw new Exception();
                         break;
                     }catch(Exception e){
-                        JOptionPane.showMessageDialog(null, "Digite uma resposta correta, por favor");
+                        JOptionPane.showMessageDialog(null, "Informe um valor correto, por favor");
                     }
                 }
-                o.setRespostaCorreta(resposta);//grava a resposta correta
 
-                //x.inserelista(o);//grava a pergunta objetiva
-                questoes.add(o);
-            }
-            while(true){
-                try{
-                    continuar = JOptionPane.showInputDialog("Digite 1 para sair\nDigite 0 para criar outra pergunta");
-                    continua = Integer.parseInt(continuar);
-                    if(continua < 0 || continua > 1){
-                        JOptionPane.showMessageDialog(null, "Digite 1 ou 0");
-                        throw new Exception();
-                    }
-                    break;
-                }catch(Exception e){
-                    JOptionPane.showMessageDialog(null, "Informe um numero válido");
+
+
+                if ( opcao == 1){
+                    Discursiva d = new Discursiva();
+                    while(true){
+                        try{
+                            peso_em_texto = JOptionPane.showInputDialog("Informe o peso da questao: ");
+                            peso = Integer.parseInt(peso_em_texto);
+                            if(peso < 1){
+                                JOptionPane.showMessageDialog(null, "Peso inválido!");
+                                throw new Exception();
+                            }
+                            contPeso += peso;
+                            break; 
+                        }catch(Exception e){
+                            JOptionPane.showMessageDialog(null, "Caracter inválido");
+                        }
+                    } 
+
+                    d.setPeso(peso);//gravando o peso da pergunta
+                    //pedindo a pergunta
+
+                    String pergunta = JOptionPane.showInputDialog("Qual é a pergunta (" + cont + ")");
+                    d.setPergunta(pergunta);//gravando a pergunta
+                    //pedindo o criterio
+                    String criterio = JOptionPane.showInputDialog("Qual é o critério de correção da pergunta: ");
+                    d.setCriteriosCorrecao(criterio);//gravando o criterio de correção
+
+                    //x.inserelista(d);//gravando no vetor de questões, a questão
+                    questoes.add(d);
                 }
+
+
+
+
+                if(opcao == 2){
+                    Objetivas o = new Objetivas();
+                    String peso_em_textoo = null;
+                    while(true){
+                        try{
+                            peso_em_textoo = JOptionPane.showInputDialog("Informe o peso da questão: ");
+                            peso = Integer.parseInt(peso_em_textoo);
+                            if(peso>10){
+                                JOptionPane.showMessageDialog(null, "Valor acima do peso da prova");
+                                throw new Exception ();
+                            }
+                            contPeso += peso;
+                            break;
+                        }catch(Exception e){
+                            JOptionPane.showMessageDialog(null, "Informe um valor correto por favor");
+                        }
+                    }
+                    o.setPeso(peso);//grava o peso da questao
+
+
+                    //pede a pergunta
+                    String perguntao = null;
+                    perguntao = JOptionPane.showInputDialog("Digite a Pergunta (" + cont + ")");
+                    o.setPergunta(perguntao);//grava a pergunta
+
+
+                    //pede os opcoes
+                    String[] opcoes = new String[5];//cria vetor de 5 alternativas
+                    for(int j = 0; j < 5; j++){
+                        String alternativa = null;
+                        alternativa = JOptionPane.showInputDialog((j+1) + ")" + "informe a alternativa: ");
+                        opcoes[j] = alternativa;//preenchendo o vetor de alternativas
+                    }
+                    o.setOpcoes(opcoes);//grava o vetor de opcoes 
+
+
+                    //pedindo resposta correta
+                    int resposta = 0;
+                    while(true){
+                        try{
+                            String resposta_em_texto = JOptionPane.showInputDialog("Digite a resposta correta: ");
+                            resposta = Integer.parseInt(resposta_em_texto);
+                            if(resposta < 1 || resposta > 5)
+                                throw new Exception();
+                            break;
+                        }catch(Exception e){
+                            JOptionPane.showMessageDialog(null, "Digite uma resposta correta, por favor");
+                        }
+                    }
+                    o.setRespostaCorreta(resposta);//grava a resposta correta
+
+                    //x.inserelista(o);//grava a pergunta objetiva
+                    questoes.add(o);
+                }
+                while(true){
+                    try{
+                        continuar = JOptionPane.showInputDialog("Digite 1 para sair\nDigite 0 para criar outra pergunta");
+                        continua = Integer.parseInt(continuar);
+                        if(continua < 0 || continua > 1){
+                            JOptionPane.showMessageDialog(null, "Digite 1 ou 0");
+                            throw new Exception();
+                        }
+                        break;
+                    }catch(Exception e){
+                        JOptionPane.showMessageDialog(null, "Informe um numero válido");
+                    }
+                }
+                cont ++;
+            }while(continua == 0);
+            if(contPeso != x.getPeso()){
+                verificaPeso = 1;
+                contPeso = 0;
+                JOptionPane.showMessageDialog(null, "Peso das questoes diferente do peso total da prova\nComeçaremos uma nova prova");
+            }else{
+                verificaPeso = 0;
             }
-            cont ++;
-        }while(continua == 0);
+        }while(verificaPeso == 1);
         x.setLista(questoes);
         x.imprimir();
         
-        //JOptionPane.showMessageDialog(null, x.imprimir());
+        JOptionPane.showMessageDialog(null, x.imprimir());
         
         
         //salvando em texto

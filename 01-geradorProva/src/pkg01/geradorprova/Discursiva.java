@@ -28,13 +28,13 @@ final class Discursiva extends Questao{
 
     public String seImprime() {
         String retorno = "";
-        retorno += "###################################\r\n";
         retorno = retorno + "(" + this.getPeso() + ") ";
         retorno = retorno + this.getPergunta() + "\r\n";
-        retorno += "------------------------\r\n";
-        retorno += "------------------------\r\n";
-        retorno += "------------------------\r\n";
+        retorno += "-------------------------------------------\r\n";
+        retorno += "-------------------------------------------\r\n";
+        retorno += "--------------------------------------------\r\n";
         retorno = retorno + "Criterio de avaliacao: " + this.getCriteriosCorrecao() + "\r\n";
+        retorno += "###################################\r\n";
         return retorno;
     }
 }

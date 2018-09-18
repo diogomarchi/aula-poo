@@ -61,11 +61,11 @@ public class Prova {
     //metodo
     public String cabeçalho() {
         String retorno = "";
-        retorno = retorno + "Nome: " + this.getNomeDisciplina() + "\n";
-        retorno = retorno + "Peso: " + this.getPeso() + "\n";
-        retorno = retorno + "Local: " + this.getLocal() + "\n";
-        retorno = retorno + "Data: " + this.getData() + "\n";
-        retorno = retorno + "Aluno:___________________________\n";
+        retorno = retorno + "Nome: " + this.getNomeDisciplina() + "\r\n";
+        retorno = retorno + "Peso: " + this.getPeso() + "\r\n";
+        retorno = retorno + "Local: " + this.getLocal() + "\r\n";
+        retorno = retorno + "Data: " + this.getData() + "\r\n";
+        retorno = retorno + "Aluno:___________________________\r\n";
         return retorno;
     }
     
@@ -74,7 +74,7 @@ public class Prova {
         imprime += cabeçalho();
         int cont = 1;
         for(int i = 0; i < this.lista.size(); i ++){
-            imprime += cont;
+            imprime += cont + ") ";
             imprime += this.lista.get(i).seImprime();
             cont++;
         }

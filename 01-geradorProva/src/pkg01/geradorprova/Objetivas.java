@@ -20,13 +20,13 @@ final class Objetivas extends Questao{
     
     public String seImprime(){
         String retorno = "";
-        retorno += "###################################\n";
         retorno += "(" + this.getPeso() + ") ";
         retorno += this.getPergunta() + "\r\n";
         for(int j = 0; j < 5; j++){
             retorno += "(" + (j+1)+ ") " + this.getOpcoes()[j]+ "\r\n";
         }
         retorno += "Resposta correta é: " + this.getRespostaCorreta() + "\r\n";
+        retorno += "###################################\r\n";
         return retorno;
     } 
 
