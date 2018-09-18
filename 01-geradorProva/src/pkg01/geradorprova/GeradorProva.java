@@ -66,27 +66,24 @@ public class GeradorProva {
         
         
         //pedindo a data
-//        JOptionPane.showMessageDialog(null, "TESTEEEE");
-//        SimpleDateFormat sdf = new SimpleDateFormat("AA/BB/CCCC");
-//        JOptionPane.showMessageDialog(null, "TESTEEEE");
-//        while (true) {
-//            try{
-//                aux = JOptionPane.showInputDialog("Digite a data (AA/BB/CCCC):");
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("AA/BB/CCCC");
-//                LocalDate.parse(aux, formatter);    
-//                sdf.parse(aux);
-//                break;
-//            }
-//            catch(DateTimeParseException | ParseException ex) {
-//                JOptionPane.showMessageDialog(null,"Digite uma data valida!");
-//            }
-//        } 
-        aux = JOptionPane.showInputDialog("Digite uma data: ");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        while (true) {
+            try{
+                aux = JOptionPane.showInputDialog("Digite a data (dd/MM/yyyy:");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate.parse(aux, formatter);    
+                sdf.parse(aux);
+                break;
+            }
+            catch(DateTimeParseException | ParseException ex) {
+                JOptionPane.showMessageDialog(null,"Digite uma data valida!");
+            }
+        } 
         x.setData(aux);
         
         
          ArrayList <Questao> questoes = new ArrayList <Questao>();
-        //montando as perguntas discrusivas
+        //montando as perguntas discursivas
         do{
             int opcao = 0;
             JOptionPane.showMessageDialog(null, "Criando uma Prova");
