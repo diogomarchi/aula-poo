@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\6427626\Downloads\PortableGit\aula-poo\calculadora\app\app.iml" filepath="C:\Users\6427626\Downloads\PortableGit\aula-poo\calculadora\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/calculadora.iml" filepath="$PROJECT_DIR$/calculadora.iml" />
+      <module fileurl="file://C:\Users\6427626\Downloads\PortableGit\aula-poo\calculadora\calculadora.iml" filepath="C:\Users\6427626\Downloads\PortableGit\aula-poo\calculadora\calculadora.iml" />
     </modules>
   </component>
 </project>
