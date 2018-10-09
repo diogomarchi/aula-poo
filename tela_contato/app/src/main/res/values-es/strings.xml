@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">tela_contato</string>
+    <string name="mobile">mobile</string>
+    <string name="e_mail">E-mail</string>
+    <string name="residencial">Residencial</string>
+    <string name="nome">Nombre</string>
+    <string name="digite_seu_numero">escriba su número</string>
+    <string name="digite_seu_sobrenome">escriba su apellido</string>
+</resources>

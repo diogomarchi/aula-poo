@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">tela_contato</string>
+    <string name="mobile">mobile</string>
+    <string name="e_mail">E-mail</string>
+    <string name="residencial">Residential</string>
+    <string name="nome">Name</string>
+    <string name="digite_seu_numero">Enter your number</string>
+    <string name="digite_seu_sobrenome">Enter your last name</string>
+</resources>
