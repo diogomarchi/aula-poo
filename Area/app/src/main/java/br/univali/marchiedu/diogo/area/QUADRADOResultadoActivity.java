@@ -12,7 +12,7 @@ public class QUADRADOResultadoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_imcresultado);
+        setContentView(R.layout.activity_quadradoresultado);
 
         double altura = this.getIntent().getDoubleExtra("altura", -1);
         double largura = this.getIntent().getDoubleExtra("largura", -1);

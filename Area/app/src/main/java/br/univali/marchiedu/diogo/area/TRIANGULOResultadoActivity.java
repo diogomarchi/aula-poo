@@ -12,7 +12,7 @@ public class TRIANGULOResultadoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_imcresultado);
+        setContentView(R.layout.activity_trianguloresultado);
 
         double base = this.getIntent().getDoubleExtra("base", -1);
         double altura = this.getIntent().getDoubleExtra("altura", -1);

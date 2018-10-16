@@ -11,7 +11,7 @@ public class QUADRADOPasso1Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_imcpasso1);
+        setContentView(R.layout.activity_quadradopasso1);
     }
 
     public void onClickAvancar(View v){

@@ -12,10 +12,10 @@ public class CIRCULOResultadoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_imcresultado);
+        setContentView(R.layout.activity_circuloresultado);
 
         double raio = this.getIntent().getDoubleExtra("raio", -1);
-        double areaC =  3,14 * Math.pow(raio, 2);
+        double areaC =  3.14 * Math.pow(raio, 2);
 
         TextView tvResultado = findViewById(R.id.tvResultado);
         NumberFormat nf = DecimalFormat.getInstance();
