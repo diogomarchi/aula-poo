@@ -16,7 +16,7 @@ public class QUADRADOResultadoActivity extends AppCompatActivity {
 
         double altura = this.getIntent().getDoubleExtra("altura", -1);
         double largura = this.getIntent().getDoubleExtra("largura", -1);
-        double areaQ = largura * Math.pow(altura, 2);
+        double areaQ = largura * altura;
 
         TextView tvResultado = findViewById(R.id.tvResultado);
         NumberFormat nf = DecimalFormat.getInstance();
