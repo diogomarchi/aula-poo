@@ -28,6 +28,6 @@
         app:layout_constraintEnd_toEndOf="@+id/tvResultado"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_check_box_outline_blank_black_48" />
+        app:srcCompat="@drawable/quadrado" />
 
 </android.support.constraint.ConstraintLayout>
