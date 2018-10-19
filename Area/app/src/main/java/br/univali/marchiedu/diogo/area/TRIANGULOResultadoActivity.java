@@ -21,9 +21,8 @@ public class TRIANGULOResultadoActivity extends AppCompatActivity {
         TextView tvResultado = findViewById(R.id.tvResultado);
         NumberFormat nf = DecimalFormat.getInstance();
         nf.setMaximumFractionDigits(1);
-        tvResultado.setText(nf.format(areaT));
-
-
-
+        nf.format(areaT);
+        String total = "area triangulo: " + areaT;
+        tvResultado.setText(total);
     }
 }

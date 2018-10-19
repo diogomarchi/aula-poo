@@ -20,9 +20,8 @@ public class CIRCULOResultadoActivity extends AppCompatActivity {
         TextView tvResultado = findViewById(R.id.tvResultado);
         NumberFormat nf = DecimalFormat.getInstance();
         nf.setMaximumFractionDigits(1);
-        tvResultado.setText(nf.format(areaC));
-
-
-
+        nf.format(areaC);
+        String total = "area do circulo: " + areaC;
+        tvResultado.setText(total);
     }
 }

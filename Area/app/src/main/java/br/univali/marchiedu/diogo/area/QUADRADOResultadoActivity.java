@@ -21,9 +21,8 @@ public class QUADRADOResultadoActivity extends AppCompatActivity {
         TextView tvResultado = findViewById(R.id.tvResultado);
         NumberFormat nf = DecimalFormat.getInstance();
         nf.setMaximumFractionDigits(1);
-        tvResultado.setText(nf.format(areaQ));
-
-
-
+        nf.format(areaQ);
+        String total = "area do quadrado: " + areaQ;
+        tvResultado.setText(total);
     }
 }
