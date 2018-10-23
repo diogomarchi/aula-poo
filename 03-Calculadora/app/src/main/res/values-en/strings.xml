@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">calculadora</string>
-    <string name="CALCULO_DE_SALARIO">WAGE CALCULATION</string>
-    <string name="Digite_seu_salario_por_dia">Enter your salary for day</string>
-    <string name="Digite_quantos_dias_voce_trabalhou">Enter how many days you worked</string>
-    <string name="Calcular_salario">Calculate salary</string>
-    <string name="SALARIO">SALARY: </string>
-</resources>
