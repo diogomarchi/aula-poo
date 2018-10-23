@@ -28,6 +28,11 @@ public class QUADRADOPasso1Activity extends AppCompatActivity {
         intencaoAbrirQUADRADOResultado.putExtra("base", base);
 
         this.startActivity(intencaoAbrirQUADRADOResultado);
-
     }
+
+    public void onClickVoltarMainActivity(View v){
+        Intent intencaoAbrirTelaInicio = new Intent(this.getApplicationContext(), MainActivity.class);
+        this.startActivity(intencaoAbrirTelaInicio);
+    }
+
 }

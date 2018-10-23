@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClickTRIANGULO(View v){
         Intent intencaoAbrirTelaTRIANGULO = new Intent(this.getApplicationContext(), TRIANGULOPasso1Activity.class);
         this.startActivity(intencaoAbrirTelaTRIANGULO);
-
     }
+
+
 }

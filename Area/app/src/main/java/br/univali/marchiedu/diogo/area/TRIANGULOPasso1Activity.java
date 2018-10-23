@@ -28,6 +28,11 @@ public class TRIANGULOPasso1Activity extends AppCompatActivity {
         intencaoAbrirTRIANGULOResultado.putExtra("altura", altura);
 
         this.startActivity(intencaoAbrirTRIANGULOResultado);
-
     }
+
+    public void onClickVoltarMainActivity(View v){
+        Intent intencaoAbrirTelaInicio = new Intent(this.getApplicationContext(), MainActivity.class);
+        this.startActivity(intencaoAbrirTelaInicio);
+    }
+
 }

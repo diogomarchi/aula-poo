@@ -27,4 +27,10 @@ public class CIRCULOPasso1Activity extends AppCompatActivity {
         this.startActivity(intencaoAbrirCIRCULOResultado);
 
     }
+
+    public void onClickVoltarMainActivity(View v){
+        Intent intencaoAbrirTelaInicio = new Intent(this.getApplicationContext(), MainActivity.class);
+        this.startActivity(intencaoAbrirTelaInicio);
+    }
+
 }
