@@ -10,21 +10,21 @@ import android.widget.Toast;
 
 public class AdicionarAbastecimentoActivity extends AppCompatActivity {
 
-    public void onClickAcao1(View v){
+    public void onClick(View v){
         EditText etQuilometragem = findViewById(R.id.etQuilometragem);
         EditText etLitro = findViewById(R.id.etLitro);
-        EditText etNomePosto = findViewById(R.id.etNomePosto);
-        RadioGroup rgMedia = findViewById(R.id.rgMedia);
+        EditText etData = findViewById(R.id.etData);
+        RadioGroup rgPosto = findViewById(R.id.rgPosto);
 
         //criando avaliação com dados aleatórios
         Abastecimento ab = new Abastecimento();
 
         ab.setQuilometragem( etQuilometragem.getText().toString() );
         ab.setLitro(etLitro.getText().toString());
-        ab.setNomePosto(etNomePosto.getText().toString());
+        ab.setData(etData.getText().toString());
 
-        RadioButton rbSelecionado = findViewById( rgMedia.getCheckedRadioButtonId() );
-        ab.setMedia(rbSelecionado.getText().toString());
+        RadioButton rbSelecionado = findViewById( rgPosto.getCheckedRadioButtonId() );
+        ab.setNomePosto(rbSelecionado.getText().toString());
 
 
         //salvando a avaliação através do DAO
@@ -38,11 +38,4 @@ public class AdicionarAbastecimentoActivity extends AppCompatActivity {
         }
 
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_adicionar_abastecimento);
-    }
-
 }

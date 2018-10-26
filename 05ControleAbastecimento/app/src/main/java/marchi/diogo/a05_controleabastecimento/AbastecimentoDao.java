@@ -54,15 +54,13 @@ public class AbastecimentoDao {
                 daVez.setQuilometragem( partesDaLinha[0] );
                 daVez.setLitro( partesDaLinha[1] );
                 daVez.setNomePosto( partesDaLinha[2] );
+                daVez.setData( partesDaLinha[3] );
                 AL_CACHE.add(daVez);
             }
 
-
         } catch (IOException e) {
             e.printStackTrace();
-
         }
-
 
         return AL_CACHE;
     }

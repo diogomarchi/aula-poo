@@ -5,25 +5,25 @@ package marchi.diogo.a05_controleabastecimento;
  */
 
 public class Abastecimento {
-    private float quilometragem;
-    private float litro;
+    private String quilometragem;
+    private String litro;
     private String nomePosto;
-    private String media;
+    private String data;
 
 
-    public float getQuilometragem() {
+    public String getQuilometragem() {
         return quilometragem;
     }
 
-    public void setQuilometragem(float quilometragem) {
+    public void setQuilometragem(String quilometragem) {
         this.quilometragem = quilometragem;
     }
 
-    public float getLitro() {
+    public String getLitro() {
         return litro;
     }
 
-    public void setLitro(float litro) {
+    public void setLitro(String litro) {
         this.litro = litro;
     }
 
@@ -35,11 +35,11 @@ public class Abastecimento {
         this.nomePosto = nomePosto;
     }
 
-    public String getMedia() {
-        return media;
+    public String getData() {
+        return data;
     }
 
-    public void setMedia(String media) {
-        this.media = media;
+    public void setData(String data) {
+        this.data = data;
     }
 }

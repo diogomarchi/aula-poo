@@ -13,31 +13,21 @@ public class AbastecimentoViewHolder extends RecyclerView.ViewHolder {
     private TextView tvQuilometragem;
     private TextView tvLitro;
     private TextView tvNomePosto;
+    private TextView tvData;
 
     public AbastecimentoViewHolder(View itemView) {
         super(itemView);
-//        itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(view.getContext(), tvConteudo.getText().toString(), Toast.LENGTH_LONG).show();
-//            }
-//        });
-
         this.tvQuilometragem = itemView.findViewById(R.id.tvQuilometragem);
         this.tvLitro = itemView.findViewById(R.id.tvLitro);
         this.tvNomePosto = itemView.findViewById(R.id.tvNomePosto);
+        this.tvData = itemView.findViewById(R.id.tvData);
     }
 
     public void atualizaGaveta(Abastecimento objetoAbastecimento){
         this.tvQuilometragem.setText( objetoAbastecimento.getQuilometragem() );
         this.tvLitro.setText( objetoAbastecimento.getLitro() );
         this.tvNomePosto.setText( objetoAbastecimento.getNomePosto() );
-
-        if(objetoAbastecimento.getMedia().equals("M1")){
-            this.tvMedia.setTextColor(Color.BLUE);
-        }else{
-            this.tvMedia.setTextColor(Color.GRAY);
-        }
+        this.tvData.setText( objetoAbastecimento.getData() );
     }
 
 }

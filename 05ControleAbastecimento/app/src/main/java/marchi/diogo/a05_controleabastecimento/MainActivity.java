@@ -14,28 +14,36 @@ public class MainActivity extends AppCompatActivity {
 
     private AbastecimentoAdapter adaptador;
 
-    private final int RC_ADICIONAR_AVALIACAO = 1312;
+    private final int RC_LISTA_ABASTECIMENTOS = 1312;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView rvListaAvaliacoes = findViewById(R.id.rvListaAvaliacoes);
+        RecyclerView rvListaAbastecimento = findViewById(R.id.rvListaAvaliacoes);
 
-        this.adaptador = new AvaliacaoAdaper();
+        this.adaptador = new AbastecimentoAdapter();
 
         this.adaptador.listaAbastecimento = AbastecimentoDao.getLista(this.getApplicationContext());
 
-        rvListaAvaliacoes.setAdapter(this.adaptador);
+        rvListaAbastecimento.setAdapter(this.adaptador);
 
-        rvListaAvaliacoes.setLayoutManager( new LinearLayoutManager(this.getApplicationContext()));
+        rvListaAbastecimento.setLayoutManager( new LinearLayoutManager(this.getApplicationContext()));
     }
 
-    public void onClickFAB(View v){
+    public void onClick(View v){
         Intent intencao = new Intent(this.getApplicationContext(), AdicionarAbastecimentoActivity.class);
 
-        startActivityForResult(intencao, RC_ADICIONAR_AVALIACAO);
+        startActivityForResult(intencao, RC_ADICIONAR_ABASTECIMENTO);
+
+//        this.adaptador.notifyDataSetChanged();
+    }
+
+    public void VerAbastecimentos(View v){
+        Intent intencao = new Intent(this.getApplicationContext(), listaAbastecimentosActivity.class);
+
+        startActivityForResult(intencao, RC_LISTA_ABASTECIMENTOS);
 
 
 //
@@ -45,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RC_ADICIONAR_AVALIACAO){
+        if(requestCode == RC_ADICIONAR_ABASTECIMENTO){
             //estou tratando o fechamento da activity AdicionarAvaliacaoActivity
             if(resultCode == 1){
                 Toast.makeText(this.getApplicationContext(), "AÇÃO 1!!!!!", Toast.LENGTH_LONG).show();
