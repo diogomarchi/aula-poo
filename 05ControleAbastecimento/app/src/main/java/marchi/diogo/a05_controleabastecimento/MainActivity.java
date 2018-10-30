@@ -34,4 +34,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intencaoAbrirTelaAbastecimentos = new Intent(this.getApplicationContext(), listaAbastecimentos.class);
         this.startActivity(intencaoAbrirTelaAbastecimentos);
     }
+
+
 }
