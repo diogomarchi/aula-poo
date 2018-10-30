@@ -3,9 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/05ControleAbastecimento.iml" filepath="$PROJECT_DIR$/05ControleAbastecimento.iml" />
+      <module fileurl="file://C:\Users\6427626.UNIVALI\Downloads\PortableGit\aula-poo\05ControleAbastecimento\05ControleAbastecimento.iml" filepath="C:\Users\6427626.UNIVALI\Downloads\PortableGit\aula-poo\05ControleAbastecimento\05ControleAbastecimento.iml" />
       <module fileurl="file://C:\Users\6427626\Downloads\PortableGit\aula-poo\05ControleAbastecimento\05ControleAbastecimento.iml" filepath="C:\Users\6427626\Downloads\PortableGit\aula-poo\05ControleAbastecimento\05ControleAbastecimento.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\Users\6427626\Downloads\PortableGit\aula-poo\05ControleAbastecimento\app\app.iml" filepath="C:\Users\6427626\Downloads\PortableGit\aula-poo\05ControleAbastecimento\app\app.iml" />
+      <module fileurl="file://C:\Users\6427626.UNIVALI\Downloads\PortableGit\aula-poo\05ControleAbastecimento\app\app.iml" filepath="C:\Users\6427626.UNIVALI\Downloads\PortableGit\aula-poo\05ControleAbastecimento\app\app.iml" />
     </modules>
   </component>
 </project>
