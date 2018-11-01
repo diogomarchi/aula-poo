@@ -18,22 +18,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    @Override
-    protected void onPause(){
-        super.onPause();
-        Log.d("CALLBACK_LCA", "Método onpause da mainactivity");
+
+
+    public void verAbastecimento(View view) {
+        Intent intent = new Intent(this.getApplicationContext(), listaAbastecimentos.class);
+        startActivity(intent);
     }
-
-    @Override
-    protected void onResume(){
-        super.onResume();
-        Log.d("CALLBACK_LCA", "Método onresume da mainactivity");
-    }
-
-    public void verAbastecimento(View v){
-        Intent intencaoAbrirTelaAbastecimentos = new Intent(this.getApplicationContext(), listaAbastecimentos.class);
-        this.startActivity(intencaoAbrirTelaAbastecimentos);
-    }
-
-
 }
