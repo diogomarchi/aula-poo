@@ -38,8 +38,11 @@ public class listaAbastecimentos extends AppCompatActivity {
     }
 
     public void telaAdicionarAbastecimento(View v){
-        Intent intencao = new Intent(this.getApplicationContext(), AdicionarAbastecimentoActivity.class);
 
+        Intent intencao = new Intent(this.getApplicationContext(), AdicionarAbastecimentoActivity.class);
+        if(this.adaptador.listaAbastecimento.size()>0) {
+            intencao.putExtra("kmAntigo", this.adaptador.listaAbastecimento.get(this.adaptador.listaAbastecimento.size() - 1).getQuilometragem());
+        }
         startActivityForResult(intencao, RC_ADICIONAR_ABASTECIMENTO);
 
 //        this.adaptador.notifyDataSetChanged();
@@ -67,4 +70,11 @@ public class listaAbastecimentos extends AppCompatActivity {
         }
 
     }
+
+
+    public void voltar(View view) {
+        Intent intent =  new Intent(this.getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+    }
+
 }

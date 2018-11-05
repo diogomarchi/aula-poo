@@ -51,8 +51,8 @@ public class AbastecimentoDao {
 
                 String[] partesDaLinha = linhaAbastecimento.split(";");
                 Abastecimento daVez = new Abastecimento();
-                daVez.setQuilometragem( partesDaLinha[0] );
-                daVez.setLitro( partesDaLinha[1] );
+                daVez.setQuilometragem(Float.parseFloat(partesDaLinha[0]));
+                daVez.setLitro(Float.parseFloat(partesDaLinha[1]));
                 daVez.setNomePosto( partesDaLinha[2] );
                 daVez.setData( partesDaLinha[3] );
                 AL_CACHE.add(daVez);

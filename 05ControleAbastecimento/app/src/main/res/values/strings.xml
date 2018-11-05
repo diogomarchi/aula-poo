@@ -1,4 +1,6 @@
 <resources>
+    <string name="campo_preenchido">Campo deve ser preenchido</string>
+    <string name="km_maior">Km de ser maior que ultimo inserido</string>
     <string name="app_name">05-ControleAbastecimento</string>
     <string-array name="PostosGasolina">
         <item>TEXACO</item>
