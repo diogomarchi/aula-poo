@@ -37,19 +37,21 @@ public class MainActivity extends AppCompatActivity {
         abastecimentos = AbastecimentoDao.getLista(this.getApplicationContext());
 
         if(abastecimentos.size()>1){
-            Float autonomia;
-            Float kmPercorridos;
-            Float litros = null;
+            double autonomia;
+            double kmPercorridos;
+            double litros = 0;
 
             kmPercorridos = abastecimentos.get(abastecimentos.size()-1).getQuilometragem() - abastecimentos.get(0).getQuilometragem();
             for (int i = 0; i < abastecimentos.size()-1; i++) {
-                litros += abastecimentos.get(i).getLitro();
+                litros = litros + abastecimentos.get(i).getLitro();
             }
 
             autonomia = kmPercorridos/litros;
 
             TextView tvResult = findViewById(tvMedia);
-            tvResult.setText(String.valueOf(autonomia));
+            NumberFormat nf = DecimalFormat.getInstance();
+            nf.setMaximumFractionDigits(2);
+            tvResult.setText(nf.format(autonomia));
         }
     }
 }
