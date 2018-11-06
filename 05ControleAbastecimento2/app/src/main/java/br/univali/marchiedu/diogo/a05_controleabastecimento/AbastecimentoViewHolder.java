@@ -38,14 +38,24 @@ public class AbastecimentoViewHolder extends RecyclerView.ViewHolder {
         this.tvLitro.setText( litros );
         this.tvData.setText( objetoAbastecimento.getData() );
 
-        if(posto.equals("Ipiranga")){
-            ivNomePosto.setImageDrawable(ContextCompat.getDrawable(App.getContext(), R.drawable.ipiranga));
-        }else if(posto.equals("Petrobras")){
-            ivNomePosto.setImageDrawable(ContextCompat.getDrawable(App.getContext(), R.drawable.petrobras));
-        }else if(posto.equals("Shell")){
-            ivNomePosto.setImageDrawable(ContextCompat.getDrawable(App.getContext(), R.drawable.shell));
-        }else{
-            ivNomePosto.setImageDrawable(ContextCompat.getDrawable(App.getContext(), R.drawable.texaco));
+        if(objetoAbastecimento.getNomePosto().equals("Texaco"))
+        {
+            ivNomePosto.setImageResource(R.drawable.texaco);
+        }
+        else if(objetoAbastecimento.getNomePosto().equals("Shell"))
+        {
+            ivNomePosto.setImageResource(R.drawable.shell);
+        }
+        else if(objetoAbastecimento.getNomePosto().equals("Petrobras"))
+        {
+            ivNomePosto.setImageResource(R.drawable.petrobras);
+        }
+        else if(objetoAbastecimento.getNomePosto().equals("Ipiranga"))
+        {
+            ivNomePosto.setImageResource(R.drawable.ipiranga);
+        }
+        else{
+            ivNomePosto.setImageResource(R.drawable.posto_de_gasolina);
         }
     }
 

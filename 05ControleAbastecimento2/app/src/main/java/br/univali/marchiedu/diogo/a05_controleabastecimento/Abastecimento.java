@@ -15,6 +15,7 @@ public class Abastecimento {
     }
 
     public void setNomePosto(String nomePosto)
+
     {
         this.nomePosto = nomePosto;
     }

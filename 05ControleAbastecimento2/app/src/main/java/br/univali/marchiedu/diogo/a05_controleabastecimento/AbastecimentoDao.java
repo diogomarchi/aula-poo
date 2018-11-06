@@ -1,6 +1,7 @@
 package br.univali.marchiedu.diogo.a05_controleabastecimento;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,9 +12,9 @@ import java.util.ArrayList;
 
 public class AbastecimentoDao {
 
-    private static ArrayList<Abastecimento> AL_CACHE = new ArrayList<Abastecimento>();
+    private static ArrayList<Abastecimento> AL_CACHE = new ArrayList<>();//acho que tem que ter abastecimentos no array
 
-    private static final String NOME_ARQUIVO = "Abastecimento.txt";
+    private static final String NOME_ARQUIVO = "Abastecimento14.txt";
 
     public static boolean salvar(Context c, Abastecimento aSerSalva){
         AL_CACHE.add(aSerSalva);
@@ -21,7 +22,8 @@ public class AbastecimentoDao {
         String avEmString = "";
         avEmString += aSerSalva.getQuilometragem() + ";";
         avEmString += aSerSalva.getLitro() + ";";
-        avEmString += aSerSalva.getNomePosto() + ";" + "\n";
+        avEmString += aSerSalva.getNomePosto() + ";";
+        avEmString += aSerSalva.getData() + ";"  + "\n";
 
         File refArquivo = new File( c.getFilesDir().getPath() + NOME_ARQUIVO );
         try {

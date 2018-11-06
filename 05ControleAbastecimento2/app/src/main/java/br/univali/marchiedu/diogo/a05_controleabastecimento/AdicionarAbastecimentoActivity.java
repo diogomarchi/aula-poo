@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 
 public class AdicionarAbastecimentoActivity extends AppCompatActivity {
-    private String postos[] = new String[]{"Ipiranga", "Petrobras", "Shell", "Texaco"};
+    private String postos[] = new String[]{"Ipiranga", "Petrobras", "Shell", "Texaco", "Outros"};
     EditText etQuilometragemAtual;
     EditText etLitro;
     EditText etData;
@@ -40,20 +40,27 @@ public class AdicionarAbastecimentoActivity extends AppCompatActivity {
 
     public void salvarKm(View view) {
         Abastecimento abastecimento = new Abastecimento();
+        if (etQuilometragemAtual.getText().toString().equals("") || etLitro.getText().toString().equals("") || etData.getText().toString().equals("")) {
 
-        if(etQuilometragemAtual.getText().toString().equals("")){
-            this.etQuilometragemAtual.setError(getString(R.string.campo_preenchido));
+            if (etQuilometragemAtual.getText().toString().equals("")) {
+                this.etQuilometragemAtual.setError(getString(R.string.campo_preenchido));
+                return;
+            }
+
+            if (etLitro.getText().toString().equals("")) {
+                this.etLitro.setError(getString(R.string.campo_preenchido));
+                return;
+            }
+
+            if (etData.getText().toString().equals("")) {
+                this.etData.setError(getString(R.string.campo_preenchido));
+                return;
+            }
             return;
+
         }
-        if(etLitro.getText().toString().equals("")){
-            this.etLitro.setError(getString(R.string.campo_preenchido));
-            return;
-        }
-        if(etData.getText().toString().equals("")){
-            this.etData.setError(getString(R.string.campo_preenchido));
-            return;
-        }
-        if(Double.parseDouble(etQuilometragemAtual.getText().toString()) <= this.kmAntigo){
+
+        if(Float.parseFloat(etQuilometragemAtual.getText().toString()) <= this.kmAntigo){
             this.etQuilometragemAtual.setError(getString(R.string.km_maior));
             return;
         }
@@ -63,11 +70,12 @@ public class AdicionarAbastecimentoActivity extends AppCompatActivity {
         abastecimento.setData(etData.getText().toString());
         abastecimento.setNomePosto(sPosto.getSelectedItem().toString());
 
+
         boolean salvo = AbastecimentoDao.salvar(this.getApplicationContext(), abastecimento);
 
         if(salvo){
             setResult(1);
-            //finish();
+            finish();//voltar activity anterior
         }else{
             Toast.makeText(this.getApplicationContext(), "Erro ao salvar", Toast.LENGTH_SHORT).show();
         }

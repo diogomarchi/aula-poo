@@ -10,11 +10,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-
-/**
- * Created by 6427626 on 26/10/2018.
- */
-
 public class listaAbastecimentos extends AppCompatActivity {
 
     private AbastecimentoAdapter adaptador;
@@ -54,20 +49,11 @@ public class listaAbastecimentos extends AppCompatActivity {
         if (requestCode == RC_ADICIONAR_ABASTECIMENTO) {
             //estou tratando o fechamento da activity AdicionarAvaliacaoActivity
             if (resultCode == 1) {
-                Toast.makeText(this.getApplicationContext(), "AÇÃO 1!!!!!", Toast.LENGTH_LONG).show();
-                this.adaptador.notifyDataSetChanged();
-            } else {
+                Toast.makeText(this.getApplicationContext(), "Abastecimento Salvo!!!!!", Toast.LENGTH_LONG).show();
+            }
+            this.adaptador.notifyDataSetChanged();
+        }else {
                 Toast.makeText(this.getApplicationContext(), "BACK BUTTON (PROVÁVEL)...", Toast.LENGTH_LONG).show();
             }
-        }else{
-            Toast.makeText(this.getApplicationContext(), "Aconteceu algum problema", Toast.LENGTH_LONG).show();
-        }
     }
-
-
-    public void voltar(View view) {
-        Intent intent =  new Intent(this.getApplicationContext(), MainActivity.class);
-        startActivity(intent);
-    }
-
 }
