@@ -1,15 +1,22 @@
 package br.univali.marchiedu.diogo.a05_controleabastecimento;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 
 
 public class AdicionarAbastecimentoActivity extends AppCompatActivity {
@@ -19,6 +26,9 @@ public class AdicionarAbastecimentoActivity extends AppCompatActivity {
     EditText etData;
     private Spinner sPosto;
     private Float kmAntigo;
+    private boolean permissaofinal;
+    private Location location;
+    private LocationManager locationManager;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +46,13 @@ public class AdicionarAbastecimentoActivity extends AppCompatActivity {
         etQuilometragemAtual = findViewById(R.id.etQuilometragem);
         etLitro = findViewById(R.id.etLitro);
         etData = findViewById(R.id.etData);
+        permissaofinal = this.getIntent().getBooleanExtra("permissao", false);
     }
 
     public void salvarKm(View view) {
+
         Abastecimento abastecimento = new Abastecimento();
+
         if (etQuilometragemAtual.getText().toString().equals("") || etLitro.getText().toString().equals("") || etData.getText().toString().equals("")) {
 
             if (etQuilometragemAtual.getText().toString().equals("")) {
@@ -63,6 +76,18 @@ public class AdicionarAbastecimentoActivity extends AppCompatActivity {
         if(Float.parseFloat(etQuilometragemAtual.getText().toString()) <= this.kmAntigo){
             this.etQuilometragemAtual.setError(getString(R.string.km_maior));
             return;
+        }
+
+        if (permissaofinal == true) {
+            GPSprovider g = new GPSprovider(getApplicationContext());
+            Location l = g.getLocation();
+            if (l != null){
+                abastecimento.setLatitude(l.getLatitude());
+                abastecimento.setLongitude(l.getLongitude());
+            }
+        } else {
+            abastecimento.setLatitude(010);
+            abastecimento.setLongitude(010);
         }
 
         abastecimento.setQuilometragem(Float.parseFloat(etQuilometragemAtual.getText().toString()));

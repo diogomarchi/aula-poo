@@ -1,11 +1,9 @@
 package br.univali.marchiedu.diogo.a05_controleabastecimento;
 
 import android.content.Context;
-import android.widget.Toast;
-
-import java.io.BufferedReader;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,7 +21,10 @@ public class AbastecimentoDao {
         avEmString += aSerSalva.getQuilometragem() + ";";
         avEmString += aSerSalva.getLitro() + ";";
         avEmString += aSerSalva.getNomePosto() + ";";
-        avEmString += aSerSalva.getData() + ";"  + "\n";
+        avEmString += aSerSalva.getData() + ";";
+        avEmString += aSerSalva.getLatitude() + ";";
+        avEmString += aSerSalva.getLongitude() + ";"  + "\n";
+
 
         File refArquivo = new File( c.getFilesDir().getPath() + NOME_ARQUIVO );
         try {
@@ -40,31 +41,23 @@ public class AbastecimentoDao {
     public static ArrayList<Abastecimento> getLista(Context c){
         AL_CACHE = new ArrayList<Abastecimento>();
 
-        File refArquivo = new File( c.getFilesDir().getPath() + NOME_ARQUIVO );
+        DbHelper DataBase = new DbHelper(c);
+        SQLiteDatabase db = DataBase.getReadableDatabase();
 
-        try {
-            FileReader leitor = new FileReader(refArquivo);
-            BufferedReader leitorDeLinha = new BufferedReader(leitor);
+        String SQLBuscaRegistros = "SELECT posto, data, distancia, litros, latitude, longitude, id FROM cadastros";
+        Cursor ponteiro = db.rawQuery(SQLBuscaRegistros, null);
 
-            String linhaAbastecimento = null;
-
-            while((linhaAbastecimento = leitorDeLinha.readLine()) != null){
-
-                String[] partesDaLinha = linhaAbastecimento.split(";");
-                Abastecimento daVez = new Abastecimento();
-                daVez.setQuilometragem(Float.parseFloat(partesDaLinha[0]));
-                daVez.setLitro(Float.parseFloat(partesDaLinha[1]));
-                daVez.setNomePosto(partesDaLinha[2]);
-                daVez.setData(partesDaLinha[3]);
-                AL_CACHE.add(daVez);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        while (ponteiro.moveToNext()){
+            Abastecimento item = new Abastecimento();
+            item.setNomePosto(ponteiro.getString(0));
+            item.setData(ponteiro.getString(1));
+            item.setQuilometragem(ponteiro.getFloat(2));
+            item.setLitro(ponteiro.getFloat(3));
+            item.setLatitude(ponteiro.getDouble(4));
+            item.setLongitude(ponteiro.getDouble(5));
+            item.setId(ponteiro.getLong(6));
+            AL_CACHE.add(item);
         }
-
         return AL_CACHE;
     }
-
-
 }
