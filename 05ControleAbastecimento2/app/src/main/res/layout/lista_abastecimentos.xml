@@ -28,14 +28,14 @@
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="26dp"
         android:layout_height="wrap_content"
-        android:text="Ver Abastecimentos"
-        android:onClick="onclickVoltar"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="100dp"
         android:clickable="true"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="146dp"
+        android:onClick="onclickVoltar"
+        android:text="Voltar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="MissingConstraints" />
 
 
