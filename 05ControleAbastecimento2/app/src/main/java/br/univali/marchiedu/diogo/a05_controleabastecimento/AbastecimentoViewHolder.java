@@ -1,63 +1,57 @@
 package br.univali.marchiedu.diogo.a05_controleabastecimento;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class AbastecimentoViewHolder extends RecyclerView.ViewHolder {
 
-    //esta classe representa cada gaveta que será apresentada na lista
+    private TextView  tvdata, tvfuel, tvkm;
+    private ImageView posto;
 
-    private TextView tvQuilometragem;
-    private TextView tvLitro;
-    private ImageView ivNomePosto;
-    private TextView tvData;
+    private  Abastecimento itemLook;
 
-    public AbastecimentoViewHolder(View itemView) {
+    public AbastecimentoViewHolder(@NonNull View itemView) {
         super(itemView);
-        this.tvQuilometragem = itemView.findViewById(R.id.tvQuilometragem);
-        this.tvLitro = itemView.findViewById(R.id.tvLitro);
-        this.ivNomePosto = itemView.findViewById(R.id.ivNomePosto);
-        this.tvData = itemView.findViewById(R.id.tvData);
+
+        itemView.setOnClickListener( new View.OnClickListener() {
+            public void onClick(View v){
+                Intent openActiviy = new Intent(v.getContext(), itemDetalhado.class);
+                openActiviy.putExtra("registro", (Parcelable) AbastecimentoViewHolder.this.itemLook);
+                ((listaAbastecimentos) v.getContext()).startActivity(openActiviy);
+            }
+        });
+
+        this.tvkm = itemView.findViewById(R.id.distance_view);
+        this.tvdata = itemView.findViewById(R.id.date_view);
+        this.posto = itemView.findViewById(R.id.image_posto);
+        this.tvfuel = itemView.findViewById(R.id.liters_view);
     }
 
-    public void atualizaGaveta(Abastecimento objetoAbastecimento){
-        String quilometros = "Km: " + String.valueOf(objetoAbastecimento.getQuilometragem());
-        String litros = String.valueOf(objetoAbastecimento.getLitro()) + " L";
-        String posto = objetoAbastecimento.getNomePosto();
+    public void atualiza_ItemLista(Abastecimento item){
 
+        itemLook= item;
 
+        this.tvkm.setText("Km: "+item.getDistancia());
+        this.tvdata.setText(item.getData());
+        this.tvfuel.setText(item.getLitros()+"L");
 
-
-        this.tvQuilometragem.setText( quilometros);
-        this.tvLitro.setText( litros );
-        this.tvData.setText( objetoAbastecimento.getData() );
-
-        if(objetoAbastecimento.getNomePosto().equals("Texaco"))
-        {
-            ivNomePosto.setImageResource(R.drawable.texaco);
-        }
-        else if(objetoAbastecimento.getNomePosto().equals("Shell"))
-        {
-            ivNomePosto.setImageResource(R.drawable.shell);
-        }
-        else if(objetoAbastecimento.getNomePosto().equals("Petrobras"))
-        {
-            ivNomePosto.setImageResource(R.drawable.petrobras);
-        }
-        else if(objetoAbastecimento.getNomePosto().equals("Ipiranga"))
-        {
-            ivNomePosto.setImageResource(R.drawable.ipiranga);
-        }
-        else{
-            ivNomePosto.setImageResource(R.drawable.posto_de_gasolina);
+        if(item.getPosto()==0){
+            this.posto.setImageResource(R.drawable.petrobras);
+        }else if(item.getPosto()==1){
+            this.posto.setImageResource(R.drawable.ipiranga);
+        }else if(item.getPosto()==2){
+            this.posto.setImageResource(R.drawable.shell);
+        }else if(item.getPosto()==3){
+            this.posto.setImageResource(R.drawable.texaco);
+        }else{
         }
     }
-
 }
+
 

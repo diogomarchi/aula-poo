@@ -7,39 +7,34 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import android.content.ContentValues;
 
 public class AbastecimentoDao {
 
-    private static ArrayList<Abastecimento> AL_CACHE = new ArrayList<>();//acho que tem que ter abastecimentos no array
-
-    private static final String NOME_ARQUIVO = "Abastecimento14.txt";
-
-    public static boolean salvar(Context c, Abastecimento aSerSalva){
-        AL_CACHE.add(aSerSalva);
-
-        String avEmString = "";
-        avEmString += aSerSalva.getQuilometragem() + ";";
-        avEmString += aSerSalva.getLitro() + ";";
-        avEmString += aSerSalva.getNomePosto() + ";";
-        avEmString += aSerSalva.getData() + ";";
-        avEmString += aSerSalva.getLatitude() + ";";
-        avEmString += aSerSalva.getLongitude() + ";"  + "\n";
+    private static ArrayList<Abastecimento> Cache = new ArrayList<Abastecimento>();
 
 
-        File refArquivo = new File( c.getFilesDir().getPath() + NOME_ARQUIVO );
-        try {
-            FileWriter escritor = new FileWriter(refArquivo, true);
-            escritor.write( avEmString );
-            escritor.close();
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
+    //salva o dado no arquivo e na cahce
+    public static boolean salvar(Context c, Abastecimento itemSave){
+        DbHelper DataBase = new DbHelper(c);
+        SQLiteDatabase db = DataBase.getWritableDatabase();
+
+        ContentValues chave = new ContentValues();
+        chave.put("posto", itemSave.getPosto());
+        chave.put("data", itemSave.getData());
+        chave.put("distancia", itemSave.getDistancia());
+        chave.put("litros", itemSave.getLitros());
+        chave.put("latitude", itemSave.getLatitude());
+        chave.put("longitude", itemSave.getLongitude());
+
+        long id = db.insert("cadastros", null, chave);
+        itemSave.setId(id);
+        Cache.add(itemSave);
+        return true;
     }
-
-    public static ArrayList<Abastecimento> getLista(Context c){
-        AL_CACHE = new ArrayList<Abastecimento>();
+    //carrega a cache com a lista de itens
+    public static  ArrayList<Abastecimento> carrega_Lista(Context c){
+        Cache = new ArrayList<Abastecimento>();
 
         DbHelper DataBase = new DbHelper(c);
         SQLiteDatabase db = DataBase.getReadableDatabase();
@@ -49,15 +44,17 @@ public class AbastecimentoDao {
 
         while (ponteiro.moveToNext()){
             Abastecimento item = new Abastecimento();
-            item.setNomePosto(ponteiro.getString(0));
+            item.setPosto(ponteiro.getInt(0));
             item.setData(ponteiro.getString(1));
-            item.setQuilometragem(ponteiro.getFloat(2));
-            item.setLitro(ponteiro.getFloat(3));
+            item.setDistancia(ponteiro.getDouble(2));
+            item.setLitros(ponteiro.getDouble(3));
             item.setLatitude(ponteiro.getDouble(4));
             item.setLongitude(ponteiro.getDouble(5));
             item.setId(ponteiro.getLong(6));
-            AL_CACHE.add(item);
+            Cache.add(item);
         }
-        return AL_CACHE;
+
+        return Cache;
     }
+
 }

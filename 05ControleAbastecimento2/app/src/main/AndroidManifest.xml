@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.univali.marchiedu.diogo.a05_controleabastecimento">
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-feature android:name="android.hardware.location.gps" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
 
     <application
         android:allowBackup="true"
@@ -19,7 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AdicionarAbastecimentoActivity" />
-        <activity android:name=".listaAbastecimentos"></activity>
+        <activity android:name=".listaAbastecimentos" />
+        <activity android:name=".itemDetalhado"></activity>
     </application>
 
 </manifest>

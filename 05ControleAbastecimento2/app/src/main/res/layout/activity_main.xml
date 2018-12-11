@@ -4,53 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tvAutonomia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
-        android:text="Autonomia Atual"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvMedia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="--"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAutonomia" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="128dp"
-        android:layout_marginTop="8dp"
-        android:text="Km/L"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvMedia" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="26dp"
+        android:layout_height="wrap_content"
+        android:text="Ver Abastecimentos"
+        android:onClick="onclick"
+        android:clickable="true"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="146dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Ver Abastecimento"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="161dp"
+        android:text="Autonomia"
         app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="verAbastecimento"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/tvKilo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="157dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="162dp"
+        android:text="TextView"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Km/L"
+        android:textSize="14dp"
+        app:layout_constraintStart_toEndOf="@+id/tvKilo"
+        app:layout_constraintTop_toBottomOf="@+id/tvKilo" />
+
+
 </android.support.constraint.ConstraintLayout>

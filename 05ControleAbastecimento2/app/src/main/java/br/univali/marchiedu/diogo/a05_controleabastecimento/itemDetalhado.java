@@ -29,25 +29,25 @@ public class itemDetalhado extends AppCompatActivity {
 
         this.objeto = (Abastecimento) getIntent().getSerializableExtra("registro");
 
-        if(objeto.getNomePosto().equals(0)){
+        if(objeto.getPosto()==0){
             this.logo.setImageResource(R.drawable.petrobras);
             nome_posto.setText("Petrobras");
-        }else if(objeto.getNomePosto().equals(1)){
+        }else if(objeto.getPosto()==1){
             this.logo.setImageResource(R.drawable.ipiranga);
-            nome_posto.setText("Ipiranga");
-        }else if(objeto.getNomePosto().equals(2)){
+            nome_posto.setText("ipiranga");
+        }else if(objeto.getPosto()==2){
             this.logo.setImageResource(R.drawable.shell);
             nome_posto.setText("shell");
-        }else if(objeto.getNomePosto().equals(3)){
+        }else if(objeto.getPosto()==3){
             this.logo.setImageResource(R.drawable.texaco);
-            nome_posto.setText("Texaco");
+            nome_posto.setText("texaco");
         }
 
         dataView.setText(objeto.getData());
         kiloInd.setText("Quilometragem");
         litersInd.setText("Litros");
-        kiloView.setText(""+objeto.getQuilometragem());
-        litersView.setText(""+objeto.getLitro());
+        kiloView.setText(""+objeto.getDistancia());
+        litersView.setText(""+objeto.getLitros());
 
         latd.setText(""+objeto.getLatitude());
         longt.setText(""+objeto.getLongitude());

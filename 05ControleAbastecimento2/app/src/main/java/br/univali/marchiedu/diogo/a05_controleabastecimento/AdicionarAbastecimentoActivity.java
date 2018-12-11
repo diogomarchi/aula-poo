@@ -20,91 +20,82 @@ import android.widget.Toast;
 
 
 public class AdicionarAbastecimentoActivity extends AppCompatActivity {
-    private String postos[] = new String[]{"Ipiranga", "Petrobras", "Shell", "Texaco", "Outros"};
-    EditText etQuilometragemAtual;
-    EditText etLitro;
-    EditText etData;
-    private Spinner sPosto;
-    private Float kmAntigo;
+    private EditText km, data, fuel;
+    private Spinner posto;
+    private double kmOld;
     private boolean permissaofinal;
     private Location location;
     private LocationManager locationManager;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_abastecimento);
 
+        posto = findViewById(R.id.spinPosto);
+        km = findViewById(R.id.editkm);
+        data = findViewById(R.id.editdate);
+        fuel = findViewById(R.id.editfuel);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, postos);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //dapta o vetor de opções para usar no spinner
+        ArrayAdapter<CharSequence> adapterSpin = ArrayAdapter.createFromResource(this.getApplicationContext(), R.array.PostosGasolina, android.R.layout.simple_spinner_item);
+        //como vai ser visto o vetor
+        adapterSpin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        posto.setAdapter(adapterSpin);
 
-        kmAntigo = this.getIntent().getFloatExtra("kmAntigo", -1);
-
-        sPosto = (Spinner) findViewById(R.id.sPosto);
-        sPosto.setAdapter(adapter);
-
-        etQuilometragemAtual = findViewById(R.id.etQuilometragem);
-        etLitro = findViewById(R.id.etLitro);
-        etData = findViewById(R.id.etData);
+        kmOld = this.getIntent().getDoubleExtra("kmAntigo", -1);
         permissaofinal = this.getIntent().getBooleanExtra("permissao", false);
     }
 
-    public void salvarKm(View view) {
 
-        Abastecimento abastecimento = new Abastecimento();
+    public void onclickdado(View v) {
 
-        if (etQuilometragemAtual.getText().toString().equals("") || etLitro.getText().toString().equals("") || etData.getText().toString().equals("")) {
+        //Cria um item sem nada
+        Abastecimento item = new Abastecimento();
 
-            if (etQuilometragemAtual.getText().toString().equals("")) {
-                this.etQuilometragemAtual.setError(getString(R.string.campo_preenchido));
-                return;
-            }
 
-            if (etLitro.getText().toString().equals("")) {
-                this.etLitro.setError(getString(R.string.campo_preenchido));
-                return;
-            }
-
-            if (etData.getText().toString().equals("")) {
-                this.etData.setError(getString(R.string.campo_preenchido));
-                return;
-            }
-            return;
-
+        if (km.getText().toString().equals("")) {
+            this.km.setError("insira valor correto");
         }
-
-        if(Float.parseFloat(etQuilometragemAtual.getText().toString()) <= this.kmAntigo){
-            this.etQuilometragemAtual.setError(getString(R.string.km_maior));
+        if (fuel.getText().toString().equals("")) {
+            this.fuel.setError("insira valor correto");
+            return;
+        }
+        if (data.getText().toString().equals("")) {
+            this.data.setError("insira valor correto");
+            return;
+        }
+        if (Double.parseDouble(km.getText().toString()) <= this.kmOld) {
+            this.km.setError("Insira valor correto");
             return;
         }
 
         if (permissaofinal == true) {
             GPSprovider g = new GPSprovider(getApplicationContext());
             Location l = g.getLocation();
-            if (l != null){
-                abastecimento.setLatitude(l.getLatitude());
-                abastecimento.setLongitude(l.getLongitude());
+            if (l != null) {
+                item.setLatitude(l.getLatitude());
+                item.setLongitude(l.getLongitude());
             }
         } else {
-            abastecimento.setLatitude(010);
-            abastecimento.setLongitude(010);
+            item.setLatitude(010);
+            item.setLongitude(010);
         }
 
-        abastecimento.setQuilometragem(Float.parseFloat(etQuilometragemAtual.getText().toString()));
-        abastecimento.setLitro(Float.parseFloat(etLitro.getText().toString()));
-        abastecimento.setData(etData.getText().toString());
-        abastecimento.setNomePosto(sPosto.getSelectedItem().toString());
+        item.setData(data.getText().toString());
+        item.setDistancia(Double.parseDouble(km.getText().toString()));
+        item.setLitros(Double.parseDouble(fuel.getText().toString()));
+        item.setPosto(posto.getSelectedItemPosition());
 
+        //salvando
+        boolean sucesso = AbastecimentoDao.salvar(this.getApplicationContext(), item);
 
-        boolean salvo = AbastecimentoDao.salvar(this.getApplicationContext(), abastecimento);
-
-        if(salvo){
+        if (sucesso) {
             setResult(1);
-            finish();//voltar activity anterior
-        }else{
-            Toast.makeText(this.getApplicationContext(), "Erro ao salvar", Toast.LENGTH_SHORT).show();
+            finish();
+        } else {
+            Toast.makeText(this.getApplicationContext(), "Erro ao salvar", Toast.LENGTH_LONG).show();
         }
     }
-
-
 }
+

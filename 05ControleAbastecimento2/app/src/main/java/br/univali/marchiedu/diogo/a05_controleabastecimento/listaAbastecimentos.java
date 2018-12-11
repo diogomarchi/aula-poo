@@ -13,47 +13,50 @@ import java.util.ArrayList;
 public class listaAbastecimentos extends AppCompatActivity {
 
     private AbastecimentoAdapter adaptador;
+    private final int codigo=2409;
+    private boolean permissao;
 
-    private final int RC_ADICIONAR_ABASTECIMENTO = 1312;
 
-
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lista_abastecimentos);
 
-        RecyclerView rvListaAbastecimento = findViewById(R.id.rvListaAbastecimentos);
+        this.permissao = this.getIntent().getBooleanExtra("permissao", false);
+
+        RecyclerView rvLista = findViewById(R.id.recicleList);
 
         this.adaptador = new AbastecimentoAdapter();
+        this.adaptador.lista = AbastecimentoDao.carrega_Lista(this.getApplicationContext());
 
-        this.adaptador.listaAbastecimento = AbastecimentoDao.getLista(this.getApplicationContext());
-
-        rvListaAbastecimento.setAdapter(this.adaptador);
-
-        rvListaAbastecimento.setLayoutManager( new LinearLayoutManager(this.getApplicationContext()));
+        rvLista.setAdapter(this.adaptador);
+        rvLista.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
     }
 
-    public void telaAdicionarAbastecimento(View v){
-
-        Intent intencao = new Intent(this.getApplicationContext(), AdicionarAbastecimentoActivity.class);
-        if(this.adaptador.listaAbastecimento.size()>0) {
-            intencao.putExtra("kmAntigo", this.adaptador.listaAbastecimento.get(this.adaptador.listaAbastecimento.size() - 1).getQuilometragem());
+    public void onclickadd(View v){
+        Intent trocar_act = new Intent(this.getApplicationContext(), AdicionarAbastecimentoActivity.class);
+        if(this.adaptador.lista.size()>0){
+            trocar_act.putExtra("kmAntigo", this.adaptador.lista.get(this.adaptador.lista.size()-1).getDistancia());
         }
-        startActivityForResult(intencao, RC_ADICIONAR_ABASTECIMENTO);
-
-//        this.adaptador.notifyDataSetChanged();
+        trocar_act.putExtra("permissao", permissao);
+        startActivityForResult(trocar_act, codigo);
     }
 
+    public  void onclickVoltar(View v){
+        setResult(1);
+        finish();
+    }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_ADICIONAR_ABASTECIMENTO) {
-            //estou tratando o fechamento da activity AdicionarAvaliacaoActivity
+    protected void onActivityResult(int requestCode,int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode==codigo) {
             if (resultCode == 1) {
-                Toast.makeText(this.getApplicationContext(), "Abastecimento Salvo!!!!!", Toast.LENGTH_LONG).show();
+                this.adaptador.notifyDataSetChanged();
+            }else{
+                Toast.makeText(this.getApplicationContext(), "Nada salvo", Toast.LENGTH_LONG).show();
             }
-            this.adaptador.notifyDataSetChanged();
-        }else {
-                Toast.makeText(this.getApplicationContext(), "BACK BUTTON (PROVÁVEL)...", Toast.LENGTH_LONG).show();
-            }
+        }else{
+            Toast.makeText(this.getApplicationContext(), "Erro", Toast.LENGTH_SHORT).show();
+        }
     }
 }

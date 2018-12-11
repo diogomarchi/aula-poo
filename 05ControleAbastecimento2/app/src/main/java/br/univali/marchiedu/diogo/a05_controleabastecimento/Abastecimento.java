@@ -2,29 +2,30 @@ package br.univali.marchiedu.diogo.a05_controleabastecimento;
 
 public class Abastecimento {
     private long id;
-    private Float quilometragem;
-    private Float litro;
-    private String nomePosto;
+    private int posto;
+    private double litros;
     private String data;
+    private double distancia;
     private double latitude;
     private  double longitude;
 
-
-
-
-    public String getNomePosto() {
-
-        return nomePosto;
+    public int getPosto() {
+        return posto;
     }
 
-    public void setNomePosto(String nomePosto)
+    public void setPosto(int posto) {
+        this.posto = posto;
+    }
 
-    {
-        this.nomePosto = nomePosto;
+    public double getLitros() {
+        return litros;
+    }
+
+    public void setLitros(double litros) {
+        this.litros = litros;
     }
 
     public String getData() {
-
         return data;
     }
 
@@ -32,20 +33,13 @@ public class Abastecimento {
         this.data = data;
     }
 
-    public Float getQuilometragem() {
-        return quilometragem;
+    public double getDistancia() {
+        return distancia;
     }
 
-    public void setQuilometragem(Float quilometragem) {
-        this.quilometragem = quilometragem;
-    }
+    public void setDistancia(double distancia) {
+        this.distancia = distancia;
 
-    public Float getLitro() {
-        return litro;
-    }
-
-    public void setLitro(Float litro) {
-        this.litro = litro;
     }
 
     public double getLatitude() {

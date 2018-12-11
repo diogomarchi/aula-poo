@@ -5,28 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recicleList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
-        android:onClick="telaAdicionarAbastecimento"
-        android:src="@drawable/outline_add_circle_outline_24"
+        android:layout_marginBottom="26dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:clickable="true"
+        android:onClick="onclickadd"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_plus_black_24dp" />
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvListaAbastecimentos"
-        android:layout_width="380dp"
-        android:layout_height="495dp"
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="26dp"
+        android:layout_height="wrap_content"
+        android:text="Ver Abastecimentos"
+        android:onClick="onclickVoltar"
+        android:clickable="true"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="8dp"
-        tools:ignore="MissingConstraints">
+        tools:layout_editor_absoluteY="146dp"
+        tools:ignore="MissingConstraints" />
 
-
-    </android.support.v7.widget.RecyclerView>
 
 
 </android.support.constraint.ConstraintLayout>
